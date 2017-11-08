@@ -24,7 +24,7 @@ function handle_request(msg, callback){
     testFolder = "./public/uploads/" + msg;
     console.log(msg);
     console.log(testFolder);
-    if (msg !== "undefined") {
+   // if (msg !== "undefined") {
         fs.readdir(testFolder, function (err, files) {
             //   console.log(files.length);
             console.log(files);
@@ -41,7 +41,7 @@ function handle_request(msg, callback){
             console.log("inside try:" + res);
             callback(null, res);
         });
-    }
+    //}
     /*var resArr = [];
    // console.log(req.body.username);
     console.log(msg);

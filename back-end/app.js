@@ -165,7 +165,7 @@ app.post('/signup', function(req, res) {
 //});
 });
 app.post('/doGetList', function(req, res) {
-    console.log(req);
+    console.log(req.body);
     kafka.make_request('list_topic',req.body.username, function(err,results){
         console.log('in result');
         console.log(results);

@@ -91,9 +91,9 @@ export const uploadFile = (payload) =>
     fetch(`${api}/upload`, {
         method: 'POST',
         body: payload
-    }).then(res => {
+    }).then(res => res.json()/*{
         return res.status;
-    }).catch(error => {
+    }*/).catch(error => {
         console.log("This is error");
         return error;
     });

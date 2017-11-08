@@ -16,9 +16,9 @@ class Welcome extends Component {
 
 
         API.uploadFile(payload)
-            .then((status) => {
-                if (status === 201) {
-                    API.doGetList(payload.username)
+            .then((data) => {
+             //   if (status === 201) {
+                    API.doGetList(data)
                         .then((res) => this.setState({
                             images: res.file
                         }))
@@ -38,19 +38,19 @@ class Welcome extends Component {
                                 images: data
                             });
                         });*/
-                }
+             //   }
             });
 
     };
 
     handleFileUser = (userdata) => {
-        API.doGetUser(userdata)
+        API.doGetList(userdata)
         // .then((status) => {
         //    if (status === 201) {
         // 	API.getFiles()
-            .then((data) => {
+            .then((data1) => {
                 this.setState({
-                    images: data
+                    images: data1.file
                 });
             })
     };
@@ -94,8 +94,8 @@ class Welcome extends Component {
             lastname: this.props.lastname,*/
         });
         //document.title = `Welcome, ${this.state.username} !!`;
-     //   this.handleFileUser(this.state);
-        /*API.getImages(this.state.username)
+        this.handleFileUser(this.props);
+       /* API.doGetList(this.state)
             .then((data) => {
                 console.log(data);
                 this.setState({
@@ -107,6 +107,13 @@ class Welcome extends Component {
     componentDidMount(){
         document.title = `Welcome, ${this.state.username} !!`;
      //   this.handleFileUser(this.state);
+      /*  API.doGetList(this.state)
+            .then((data) => {
+                console.log(data);
+                this.setState({
+                    images: data
+                });
+            });*/
 
     }
 

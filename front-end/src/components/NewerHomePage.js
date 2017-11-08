@@ -5,6 +5,7 @@ import Login from "./Login";
 import Message from "./Message";
 import Welcome from "./Welcome";
 import Signup from "./Signup";
+import ImageGridList from "./ImageGridList";
 
 class NewerHomePage extends Component {
 
@@ -45,10 +46,10 @@ class NewerHomePage extends Component {
                         message: "Welcome to my App..!!",
                         username: userdata.username
                     });
-                    API.doGetList(userdata)
+                    /*API.doGetList(userdata)
                         .then((res) => this.setState({
                             files: res.file
-                        }))
+                        }))*/
                     this.props.history.push("/welcome");
                 } else if (status === 401) {
                     this.setState({
@@ -122,11 +123,8 @@ class NewerHomePage extends Component {
                 <Route exact path="/welcome" render={() => (
                     <div>
                     <Welcome handleLogout={this.handleLogout} username={this.state.username}
-                    files={this.state.files}/>
-                     <Message message={this.state.files.map((item,index) =>
-                        <li key={index}>{item}</li>
+                    />
 
-                    )}/>
                     </div>
                 )}/>
             </div>
