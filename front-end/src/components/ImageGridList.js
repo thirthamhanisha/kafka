@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import {GridList, GridListTile} from 'material-ui/GridList';
 import * as API from '../api/API';
-
+import Message from "./Message";
 
 const styles = theme => ({
     root: {
@@ -222,7 +222,7 @@ class ImageGridList extends Component {
                                                             shareNow
                                                         </button>
                                                     </div>
-
+                                                     <Message message = {this.state.message}/>
 
 
                                                 </form>

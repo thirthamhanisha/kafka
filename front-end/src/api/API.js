@@ -129,7 +129,7 @@ export const doGetList = (payload) =>
             return error;
         });
 export const doShare = (payload) =>
-    fetch(`${api}/users/doShare`, {
+    fetch(`${api}/doShare`, {
         method: 'POST',
         headers: {
             ...headers,

@@ -84,7 +84,8 @@ class NewerHomePage extends Component {
             .then((status) => {
                 if(status === 200){
                     this.setState({
-                        isLoggedIn: false
+                        isLoggedIn: false,
+                        message: "logged out successfully"
                     });
                     this.props.history.push("/");
                 }
@@ -125,6 +126,18 @@ class NewerHomePage extends Component {
                     <Welcome handleLogout={this.handleLogout} username={this.state.username}
                     />
 
+                    </div>
+                )}/>
+                <Route exact path="/imagegridlist" render={() => (
+                    <div>
+                        <ImageGridList username = {this.state.username}/>
+                        <Message message={this.state.message}/>
+                    </div>
+                )}/>
+                <Route exact path="/userprofile" render={() => (
+                    <div>
+                        <UserProfile username = {this.state.username}/>
+                        <Message message={this.state.message}/>
                     </div>
                 )}/>
             </div>
