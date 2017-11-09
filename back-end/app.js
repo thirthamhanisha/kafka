@@ -298,4 +298,58 @@ app.post('/upload', upload.any(), function (req, res, next) {
     //  res.status(201).send(body1);
     // res.status(201).end();
 });
+
+router.post('/doShare', function (req, res, next) {
+
+    var username = req.body.username;
+    var shareuser = req.body.username1;
+    var usernames = shareuser.split(',');
+    //   var userfolder = 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/' + req.body.username + '/' + req.body.activeItemName;
+    var userfolder = path.join(__dirname,'..','public','uploads',req.body.username,req.body.activeItemName);
+    var sharetouser ;
+    console.log(userfolder);
+    /*var getUser="insert into shareuser(username, foldername) values ('"+req.param("username")+"','" + req.param("activeItemName")+"')";
+                    console.log("Query is:"+getUser);
+        var getUser1="insert into shareuser(username, foldername) values ('"+req.param("username1")+"','" + req.param("activeItemName")+"')";
+                    console.log("Query is:"+getUser);
+                    */
+    mysql.getConnection(function (err, connect) {
+        if (err) {
+            connect.release();
+            throw err;
+        }
+        for(i = 0; i < usernames.length; i++) {
+            //  sharetouser = 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/' + usernames[i] + '/' + req.body.activeItemName;
+            sharetouser = path.join(__dirname,'..','public', 'uploads',usernames[i], req.body.activeItemName);
+            var getUser="insert into shareuser(username, foldername) values ('" + usernames[i] +"','" + req.param("activeItemName")+"')";
+            console.log(sharetouser)  ;
+            console.log("Query is:" + getUser);
+            fse.copy(userfolder, sharetouser, function(err)  {
+                if(err){
+                    return console.error(err)
+                }
+            })
+
+            connect.query(getUser);
+        }
+        connect.release();
+        if (!err) {
+            if(usernames.length>0)
+            {
+                res.status(201).json({message: "Sharing successful"});
+            }
+            else{
+                res.status(201).json({message: "Sharing unsuccessful"});
+            }
+        }
+        connect.on('error', function (err) {
+            throw err;
+            return;
+        });
+    });
+
+
+
+
+});
 module.exports = app;
