@@ -6,6 +6,7 @@ import Message from "./Message";
 import Welcome from "./Welcome";
 import Signup from "./Signup";
 import ImageGridList from "./ImageGridList";
+import UserProfile from "./UserProfile";
 
 class NewerHomePage extends Component {
 
