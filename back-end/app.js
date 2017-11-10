@@ -240,32 +240,13 @@ app.post('/upload', upload.any(), function (req, res, next) {
                         if(results.code == 200){
                             //  done(null,true,results/*{username: username, password: password}*/);
                             console.log(results.value);
-                          /*  var resarr = [];
-                            var res1 = results.value;
-                            //  if(res1.length!== 0)
-                            //  {
-                            resarr = res1.split('<br>');
-                            res1.length = res1.length-1;
-                            console.log(resarr);*/
-                            //   }
-                          //  res.status(201).send({file: resarr});
+
                             var arr = results.value;
                             res.status(201).json({username: arr});
                         }
                     }
                 });
-                /*var homefolder = 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/'+ resArr[0];
-                var userfolder= 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/' + req.body.username + '/' + resArr[i];*/
 
-                /*var homefolder = path.join(__dirname,'..','public','uploads', resArr[i]);
-                console.log(homefolder);
-                var userfolder= path.join(__dirname,'..','public','uploads', req.body.username, resArr[i]);
-                console.log(userfolder);
-                fse.move(homefolder, userfolder, function(err)  {
-                    if(err){
-                        return console.error(err)
-                    }
-                })*/
                 break;
             }
         }
@@ -302,7 +283,9 @@ app.post('/upload', upload.any(), function (req, res, next) {
 app.post('/doShare', function (req, res, next) {
 
     var username = req.body.username;
-    var shareuser = req.body.username1;
+    var shareuser = req.body.emails;
+    console.log(username);
+    console.log(shareuser);
     var usernames = shareuser.split(',');
     //   var userfolder = 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/' + req.body.username + '/' + req.body.activeItemName;
    // var userfolder = path.join(__dirname,'public','uploads',req.body.username,req.body.activeItemName);
@@ -313,7 +296,7 @@ app.post('/doShare', function (req, res, next) {
         var getUser1="insert into shareuser(username, foldername) values ('"+req.param("username1")+"','" + req.param("activeItemName")+"')";
                     console.log("Query is:"+getUser);
                     */
-    kafka.make_request('share_topic',{username: req.body.username, item: req.body.activeItemName, shareuser: req.body.username1 }, function(err,results){
+    kafka.make_request('share_topic',{username: req.body.username, item: req.body.activeItemName, shareuser: req.body.emails }, function(err,results){
 
         console.log('in result');
         console.log(results);
@@ -332,6 +315,34 @@ app.post('/doShare', function (req, res, next) {
         });
     });
 
+app.post('/doStar', function (req, res, next) {
+
+    var username = req.body.username;
+
+    console.log(username);
+
+    var sharetouser ;
+
+
+
+    kafka.make_request('star_topic',{username: req.body.username, item: req.body.item }, function(err,results){
+
+        console.log('in result');
+        console.log(results);
+        if(err){
+            res.status(500).send();
+        }
+        else
+        {
+            if(results.code == 200){
+                //  done(null,true,results/*{username: username, password: password}*/);
+                console.log(results.value);
+
+                res.status(201).json({message: "Sharing successful"});
+            }
+        }
+    });
+});
 
 
 

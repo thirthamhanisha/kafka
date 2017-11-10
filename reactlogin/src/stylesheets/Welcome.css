@@ -1,0 +1,98 @@
+.page-header-welcome{
+    position: fixed;
+    z-index: 5;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    white-space: nowrap;
+    left: 240px;
+    width: calc(100% - (200px + 2 * 40px));
+    min-width: 744px;
+    background: #fff;
+    padding: 40px 0 0 40px;
+    height: 56px;
+}
+
+.page-header__heading {
+    font-size: 20px;
+    line-height: 32px;
+    padding: 0;
+    margin: 0;
+    color: #1B2733;
+}
+
+.mainContainer{
+    position: relative;
+    z-index: 1;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    min-width: 420px;
+    outline: none;
+    top: 100px;
+    left: 290px;
+}
+
+.upload-file{
+    top: 200px;
+}
+
+.mainContainerRoot{
+    display: flex;
+    flexWrap: wrap;
+    justifyContent: space-around;
+    overflow: hidden;
+}
+
+.itemRow{
+    width: 700px;
+    border-top: solid 1px #E6E8EB;
+    text-align: left;
+    vertical-align: middle;
+    padding: 0px 11px 0px 12px;
+}
+
+.home-access-section__header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+    padding: 0 11px 0 12px;
+    font-weight: 400;
+    line-height: 40px;
+    font-size: 12px;
+    color: #637282;
+    border-bottom: solid 1px #E6E8EB;
+    width: 700px;
+}
+
+.share-button{
+    line-height: 20px;
+    padding: 0 16px;
+    font-weight: 500;
+    border: solid 2px #E6E8EB;
+    background-color: inherit;
+    display: inline;
+    zoom: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    height: 25px;
+    text-decoration: none;
+    border-radius: 4px;
+    outline: none;
+    margin: 5px;
+    width: 150px;
+}
+
+.account-div{
+    border-top: 1px solid #E6E8EB;
+    width: 700px;
+}
