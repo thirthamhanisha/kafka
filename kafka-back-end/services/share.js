@@ -27,7 +27,7 @@ function handle_request(msg, callback){
     console.log(userfolder);
     for(i = 0; i < usernames.length; i++) {
         //  sharetouser = 'C:/Users/thirt/eclipse-workspace-javascript/LoginAppReactJS/LoginAppReactJS/nodelogin/public/uploads/' + usernames[i] + '/' + req.body.activeItemName;
-        sharetouser = path.join(__dirname,'..','public', 'uploads',usernames[i], msg.item);
+        sharetouser = path.join(__dirname,'..','public','uploads',usernames[i], msg.item);
         /*var getUser="insert into shareuser(username, foldername) values ('" + usernames[i] +"','" + req.param("activeItemName")+"')";*/
         console.log(sharetouser)  ;
 

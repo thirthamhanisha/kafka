@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { Route, withRouter } from 'react-router-dom';
-import {withStyles} from 'material-ui/styles';
 import {GridList, GridListTile} from 'material-ui/GridList';
-import Login from "./Login";
-import Message from "./Message";
-import Welcome from "./Welcome";
-import SignUp from "./SignUp";
 import * as API from '../api/API';
-import {Link} from 'react-router-dom';
-//import gridlist from './ImageGridList.css';
-//import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import '../stylesheets/Welcome.css';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
 const styles = theme => ({
@@ -80,6 +71,7 @@ class StarredFiles extends Component {
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleShare = this.handleShare.bind(this);
+        this.handleDelStar = this.handleDelStar.bind(this);
     }
 
     openModal(item) {
@@ -103,6 +95,26 @@ class StarredFiles extends Component {
 
     handleShare = (userdata) => {
         API.doShare(userdata)
+            .then((status) => {
+                if (status === 201) {
+                    this.setState({
+                        modalIsOpen: true,
+                        message: "Share successful!!",
+                        username: userdata.username,
+                        activeItemName: userdata.activeItemName
+                    });
+                    //this.props.history.push("/welcome");
+                } else if (status === 401) {
+                    this.setState({
+                        isLoggedIn: false,
+                        message: "Enter valid information. Try again..!!"
+                    });
+                }
+            });
+    };
+
+    handleDelStar = (file) => {
+        API.doDelStar({username: this.props.username, item: file})
             .then((status) => {
                 if (status === 201) {
                     this.setState({
@@ -170,13 +182,54 @@ class StarredFiles extends Component {
                 <GridList cellHeight={35} cols={1}>
                     {this.props.items.map(tile => (
                         <GridListTile key={tile} cols={tile.cols || 1}>
+                            <Modal
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                //contentLabel="Example Modal"
+                                itemId={this.state.activeItemId}
+                                itemName={this.state.activeItemName}
+                                overlayClassName="mainContainerRoot mainContainer"
+                            >
+
+                                <h6 ref={subtitle => this.subtitle = subtitle}>{this.state.activeItemName}</h6>
+                                <h6 ref={subtitle => this.subtitle = subtitle}>{this.state.username}</h6>
+                                <button onClick={this.closeModal}>close</button>
+                                <form>
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        label="email"
+                                        placeholder="Enter comma separated emails"
+                                        value={this.state.emails}
+                                        onChange={(event) => {
+                                            this.setState({
+                                                emails: event.target.value
+                                            });
+                                        }}
+                                    />
+                                    <button
+                                        className="btn btn-primary"
+                                        type="button"
+                                        onClick={() => this.handleShare(this.state)}>
+                                        Share
+                                    </button>
+                                    <button
+                                        className="btn btn-primary"
+                                        type="button"
+                                        onClick={() => this.handleShare(this.state)}>
+                                        Star
+                                    </button>
+                                </form>
+                            </Modal>
 
                             <div className="itemRow">
 
 
                                 <a href= {'http://localhost:3001/files/download/'+this.props.username+'/'+tile} download style={{color:'#3d464d'}}>{tile} </a>
                                 <button className="share-button" onClick={() => this.openModal(tile)} style={{float:'right'}}>Share</button>
-                                <button className="share-button" onClick={() => this.openModal(tile)} style={{float:'right'}}>Remove Star</button>
+                                <button className="share-button" onClick={() => this.handleDelStar(tile)} style={{float:'right'}}>Remove Star</button>
 
 
 

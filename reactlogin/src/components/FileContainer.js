@@ -81,6 +81,7 @@ class FileContainer extends Component {
         this.closeModal = this.closeModal.bind(this);
         this.handleShare = this.handleShare.bind(this);
         this.handleStar = this.handleStar.bind(this);
+
     }
 
     openModal(item) {
@@ -122,20 +123,22 @@ class FileContainer extends Component {
             });
     };
 
-    handleStar = (file) => {
-      //  file.append('mypic', event.target.files[0]);
-        file.append('username',this.state.username);
-        file.append('item',this.state.activeItemName);
-        API.doStar(file)
+
+        handleStar = (file2) => {
+
+            var file = new FormData();
+           // file.append('item', file2);
+           // file.append('username',this.state.username);
+            API.doStar({username: this.props.username, item: file2 })
             .then((status) => {
                 if (status === 201) {
                     this.setState({
-                    //    modalIsOpen: true,
+                        //    modalIsOpen: true,
                         message: "Share successful!!",
-                       username: file.username,
-                    //    activeItemName: file.activeItemName
+                        username: file2.username,
+                        //    activeItemName: file.activeItemName
                     });
-                    this.props.history.push("/");
+                //    this.props.history.push("/");
                 } else if (status === 401) {
                     this.setState({
                         isLoggedIn: false,
@@ -143,7 +146,10 @@ class FileContainer extends Component {
                     });
                 }
             });
-    };
+
+
+       };
+
 
     /*static propTypes = {
         handleShare: PropTypes.func.isRequired

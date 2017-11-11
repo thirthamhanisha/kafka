@@ -111,7 +111,33 @@ export const doGetList = (payload) =>
             console.log("This is error.");
             return error;
         });
+export const doGetStar = (payload) =>
+    fetch(`${api}/doGetStar`,{
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .catch(error => {
+            console.log("This is error.");
+            return error;
+        });
 
+export const doDelStar = (payload) =>
+    fetch(`${api}/doDelStar`,{
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+        .catch(error => {
+            console.log("This is error.");
+            return error;
+        });
 export const doStar = (payload) =>
     fetch(`${api}/doStar`, {
         method: 'POST',
@@ -119,8 +145,6 @@ export const doStar = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        //credentials: 'include',
-        //mode: 'cors',
         body: JSON.stringify(payload)
     }).then(res => {
         return res.status;

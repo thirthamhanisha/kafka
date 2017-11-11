@@ -61,6 +61,18 @@ class Welcome extends Component {
             })
     };
 
+    handleFileStar = (userdata) => {
+        API.doGetStar(userdata)
+        // .then((status) => {
+        //    if (status === 201) {
+        // 	API.getFiles()
+            .then((data2) => {
+                this.setState({
+                    images_star: data2.file
+                });
+            })
+    };
+
 
     /*getUserFiles = (userdata) => {
         API.GetFiles(userdata)
@@ -86,10 +98,12 @@ class Welcome extends Component {
         this.state = {
             username : '',
             images: [],
+            images_star: [],
             folderpath : ''
         };
 
         this.handleFileUser = this.handleFileUser.bind(this);
+        this.handleFileStar = this.handleFileStar.bind(this);
     }
 
    componentWillMount(){
@@ -98,6 +112,8 @@ class Welcome extends Component {
             //getUserFiles: this.getUserFiles
         });
        this.handleFileUser(this.props);
+       this.handleFileStar(this.props);
+
         //document.title = `Welcome, ${this.state.username} !!`;
        //this.getUserFiles(this.state);
     }
@@ -130,7 +146,7 @@ class Welcome extends Component {
                 <PageHeader/>
 
                 <Starred/>
-                <StarredFiles items={this.state.images} route={this.props.route} username={this.state.username}/>
+                <StarredFiles items={this.state.images_star} route={this.props.route} username={this.state.username}/>
                 <Recent/>
                 <FileContainer items={this.state.images} route={this.props.route} username={this.state.username}/>
 

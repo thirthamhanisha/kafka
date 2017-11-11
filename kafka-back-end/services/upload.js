@@ -21,7 +21,7 @@ function handle_request(msg, callback){
 
     var res = {};
     var response = "";
-    testFolder = "../public/uploads/" + msg.username +"/" + msg.file;
+    testFolder = "../public/uploads/"+msg.username+"/"+msg.file;
     const dir = path.join(__dirname,testFolder);
     console.log(msg);
     console.log(dir);
