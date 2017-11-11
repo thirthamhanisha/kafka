@@ -121,6 +121,8 @@ class Welcome extends Component {
     componentDidMount(){
     	
         document.title = `Welcome, ${this.state.username} !!`;
+        this.handleFileUser(this.props);
+        this.handleFileStar(this.props);
        // this.getUserFiles(this.state);
         /*API.getImages()
         .then((data) => {

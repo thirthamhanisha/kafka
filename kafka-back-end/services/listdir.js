@@ -26,6 +26,8 @@ function handle_request(msg, callback){
     console.log(testFolder);
    // if (msg !== "undefined") {
         fs.readdir(testFolder, function (err, files) {
+            if(err)
+             return   console.log(err);
             //   console.log(files.length);
             console.log(files);
             for (var i = 0; i < files.length; i++) {
