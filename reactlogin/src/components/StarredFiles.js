@@ -118,10 +118,10 @@ class StarredFiles extends Component {
             .then((status) => {
                 if (status === 201) {
                     this.setState({
-                        modalIsOpen: true,
-                        message: "Share successful!!",
-                        username: userdata.username,
-                        activeItemName: userdata.activeItemName
+                      //  modalIsOpen: true,
+                        images_star: "delete successful!!",
+                      //  username: userdata.username,
+                      //  activeItemName: userdata.activeItemName
                     });
                     //this.props.history.push("/welcome");
                 } else if (status === 401) {

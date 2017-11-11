@@ -396,10 +396,6 @@ app.post('/doDelStar', function (req, res, next) {
     console.log(username);
     console.log(item);
 
-    var sharetouser ;
-
-
-
     kafka.make_request('delstar_topic',{username: req.body.username, item: req.body.item }, function(err,results){
 
         console.log('in result');
@@ -420,7 +416,7 @@ app.post('/doDelStar', function (req, res, next) {
                 res1.length = res1.length-1;
                 console.log(resarr);
 
-                res.status(201).json({file: resarr});
+                res.status(201).json({msg: ""});
             }
         }
     });
