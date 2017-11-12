@@ -113,10 +113,12 @@ app.post('/login', function(req, res) {
         if(!user) {
             res.status(401).send();
         }
-        req.session.user = user.username;
-        console.log(req.session.user);
-        console.log("session initilized");
-        return res.status(201).send({username:"test"});
+        else {
+            req.session.user = user.username;
+            console.log(req.session.user);
+            console.log("session initilized");
+            return res.status(201).send({username: "test"});
+        }
     })(req, res);
 });
 

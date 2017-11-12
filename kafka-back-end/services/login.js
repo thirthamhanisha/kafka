@@ -7,7 +7,7 @@ function handle_request(msg, callback){
 
     var res = {};
     console.log("In handle request:" + JSON.stringify(msg));
-    mongo.connect(mongoURL, function () {
+    mongo.myconnect(mongoURL, function () {
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('login');
         key = "273"
