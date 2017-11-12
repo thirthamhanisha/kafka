@@ -173,3 +173,22 @@ export const downloadFile = (payload) =>
         console.log("This is error");
         return error;
     });
+
+export const createGroup = (payload) =>
+    fetch(`${api}/createGroup`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        //credentials: 'include',
+        //mode: 'cors',
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+

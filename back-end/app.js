@@ -421,6 +421,69 @@ app.post('/doDelStar', function (req, res, next) {
         }
     });
 });
+app.post('/editprofile', function (req, res, next) {
+    kafka.make_request('profile_topic',{"username":req.body.username,"password":req.body.password, "firstname": req.body.firstname, "lastname": req.body.lastname, "contact": req.body.contact, "education": req.body.education, "interests": req.body.interests}, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            done(err,{});
+        }
+        else
+        {
+            //if(results.code == 200){
+            res.status(201).send();
+            //done(null,true,{username: req.body.username, password: req.body.password, firstname: req.body.firstname, lastname:req.body.lastname/"bhavan@b.com",password:"a"/});
+            //}
+            /*else {
+                done(null,false);
+            }*/
+        }
+    });
+});
+app.post('/createFolder', function (req, res, next) {
+    kafka.make_request('folder_topic',{"username":req.body.username,"folder":req.body.folder}, function(err,results){
+        console.log('in result');
+        console.log(results);
+        if(err){
+            done(err,{});
+        }
+        else
+        {
+            //if(results.code == 200){
+            res.status(201).send();
+            //done(null,true,{username: req.body.username, password: req.body.password, firstname: req.body.firstname, lastname:req.body.lastname/"bhavan@b.com",password:"a"/});
+            //}
+            /*else {
+                done(null,false);
+            }*/
+        }
+    });
 
+});
 
+app.post('/createGroup', function (req, res, next) {
+
+    var username = req.body.username;
+    var shareuser = req.body.emails;
+    var usernames = shareuser.split(',');
+    //var sharetouser ;
+
+    kafka.make_request('group_topic',{username: req.body.username, shareuser: req.body.emails, groupname: req.body.groupname}, function(err,results){
+
+        console.log('in result');
+        console.log(results);
+        if(err){
+            res.status(500).send();
+        }
+        else
+        {
+            if(results.code == 200){
+                //  done(null,true,results/{username: username, password: password}/);
+                console.log(results.value);
+
+                res.status(201).json({message: "Sharing successful"});
+            }
+        }
+    });
+});
 module.exports = app;

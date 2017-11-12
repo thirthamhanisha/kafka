@@ -25,6 +25,8 @@ exports.collection = function(name){
       throw new Error('Must connect to Mongo before calling "collection"');
     } 
     return db.collection(name);
+    db.close();
+
   
 };
 
