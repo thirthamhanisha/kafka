@@ -6,7 +6,8 @@ var db;
 /**
  * Connects to the MongoDB Database with the provided URL
  */
-exports.myconnect = function(url, callback){
+
+/*exports.myconnect = function(url, callback){
     MongoClient.connect(url, function(err, _db){
       if (err) { throw new Error('Could not connect: '+err); }
       db = _db;
@@ -16,9 +17,10 @@ exports.myconnect = function(url, callback){
       callback(db);
 
     });
-};
+};*/
 
-/*exports.myconnect = function(url, callback){
+
+exports.myconnect = function(url, callback){
     if(db)
     {
         callback(db);
@@ -36,7 +38,7 @@ exports.myconnect = function(url, callback){
             callback(db);
         });
     }
-};*/
+};
 
 /**
  * Returns the collection on the selected database
