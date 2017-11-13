@@ -153,6 +153,7 @@ export const doStar = (payload) =>
             console.log("This is error");
             return error;
         });
+
 export const uploadFile = (payload) =>
     fetch(`${api}/upload`, {
         method: 'POST',

@@ -35,10 +35,12 @@ function handle_request(msg, callback){
             if(err){
                 return console.error(err)
             }
-            res.code = "200";
-            res.value = "staring successful";
-            console.log("inside try:" + res);
-            callback(null, res);
+            else {
+                res.code = "200";
+                res.value = "staring successful";
+                console.log("inside try:" + res);
+                callback(null, res);
+            }
         })
 
 

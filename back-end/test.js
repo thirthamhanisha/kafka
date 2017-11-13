@@ -9,8 +9,8 @@ var request = require('supertest');
 var server = require('./bin/www');
 
 const userCredentials = {
-    username: 'first@last.com',
-    password: 'password'
+    username: 'y@y.com',
+    password: '2'
 }
 
 var authenticatedUser = request.agent(server);
@@ -24,10 +24,10 @@ describe('Server test', function() {
     describe('Get User Files', function () {
         it('Get User files successfully', function (done) {
             const newUser = {
-                username: 'first@last.com'
+                username: 'y@y.com'
             }
             authenticatedUser
-                .post('/users/files')
+                .post('/doGetList')
                 .send(newUser)
                 .end(function (err, response) {
                     if(err){
@@ -45,7 +45,7 @@ describe('Server test', function() {
             it('Should log in the user successfully', function (done) {
 
                 authenticatedUser
-                    .post('/users/doLogin')
+                    .post('/login')
                     .send(userCredentials)
                     .end(function (err, response) {
                         expect(response.statusCode).to.equal(201);
@@ -66,7 +66,7 @@ describe('Server test', function() {
                     password: 'password'
                 }
                 authenticatedUser
-                    .post('/users/doSignup')
+                    .post('/signup')
                     .send(newUser)
                     .end(function (err, response) {
                         expect(response.statusCode).to.equal(401);
@@ -81,12 +81,12 @@ describe('Server test', function() {
         describe('Share feature', function () {
             it('Files should be shared successfully', function (done) {
                 const newUser = {
-                    emails: 'first1@last1.com',
-                    username: 'first@last.com',
+                    emails: 'q@a.com',
+                    username: 'y@y.com',
                     activeItemName: 'shared file.txt'
                 }
                 authenticatedUser
-                    .post('/users/doShare')
+                    .post('/doShare')
                     .send(newUser)
                     .end(function (err, response) {
                         expect(response.statusCode).to.equal(201);
@@ -100,11 +100,11 @@ describe('Server test', function() {
         describe('File Download', function () {
             it('Files should be downloaded successfully', function (done) {
                 const newUser = {
-                    username: 'first@last.com',
+                    username: 'y@y.com',
                     activeItemName: 'shared file.txt'
                 }
                 authenticatedUser
-                    .post('http://localhost:3001/files/download/first2@last2.com/shared file.txt')
+                    .post('http://localhost:3001/download/y@y.com/shared file.txt')
                     .send(newUser)
                     .end(function (err, response) {
                         //expect(response.statusCode).to.equal(201);
@@ -118,11 +118,11 @@ describe('Server test', function() {
         describe('Create Folder', function () {
             it('Folder should be created successfully', function (done) {
                 const newUser = {
-                    username: 'first@last.com',
+                    username: 'y@y.com',
                     folder: 'TestFolder'
                 }
                 authenticatedUser
-                    .post('http://localhost:3001/users/createFolder')
+                    .post('http://localhost:3001/createFolder')
                     .send(newUser)
                     .end(function (err, response) {
                         expect(response.statusCode).to.equal(201);

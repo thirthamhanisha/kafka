@@ -281,7 +281,13 @@ app.post('/upload', upload.any(), function (req, res, next) {
     //  res.status(201).send(body1);
     // res.status(201).end();
 });
+app.get('/download/:username/:filename', function (req, res, next) {
+    var filepath = "../../kafka-back-end/public/uploads/"+req.param("username")+'/'+req.param("filename");
+    var file = path.join(__dirname,filepath);
+    console.log(file);
+    res.download(file);
 
+});
 app.post('/doShare', function (req, res, next) {
 
     var username = req.body.username;

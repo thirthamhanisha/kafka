@@ -29,19 +29,23 @@ function handle_request(msg, callback){
             if(err)
              return   console.log(err);
             //   console.log(files.length);
-            console.log(files);
-            for (var i = 0; i < files.length; i++) {
-                if (i < files.length - 1) {
-                    response += files[i] + "<br>";
+
+            else
+            {
+                console.log(files);
+                for (var i = 0; i < files.length; i++) {
+                    if (i < files.length - 1) {
+                        response += files[i] + "<br>";
+                    }
+                    else {
+                        response += files[i];
+                    }
                 }
-                else {
-                    response += files[i];
-                }
+                res.code = "200";
+                res.value = response;
+                console.log("inside try:" + res);
+                callback(null, res);
             }
-            res.code = "200";
-            res.value = response;
-            console.log("inside try:" + res);
-            callback(null, res);
         });
     //}
     /*var resArr = [];
